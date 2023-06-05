@@ -10,24 +10,20 @@ public static class MovementStringsConstrains
 [RequireComponent(typeof(PlayerController))]
 public class PlayerAnimationController : MonoBehaviour
 {
-    private PlayerController playerController;
-
-    private Animator animator;
-
+    private ICharacter character;
+    protected Animator animator;
     //IDLE AND RUN
     private int velocityX = Animator.StringToHash(MovementStringsConstrains.velocityX);
 
-
     private void Awake() 
     {
-        playerController = GetComponent<PlayerController>();
+        character = GetComponent<ICharacter>();
         animator = GetComponentInChildren<Animator>();
     }
 
     private void LateUpdate() 
     {
-        
-        animator.SetFloat(velocityX, playerController.velocityX);
+        animator.SetFloat(velocityX, character.CharacterMovement.percentVelocityX);
     }
 
 
