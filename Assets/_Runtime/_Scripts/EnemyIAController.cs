@@ -58,4 +58,10 @@ public class EnemyIAController : MonoBehaviour, ICharacter
 
     }
 
+    private void OnDestroy() 
+    {
+        OnTakingDamage.OnTakeDamageEvent -= OnTakeDamageEvent;
+ 
+    }
+
 }
