@@ -20,13 +20,13 @@ public class PlayerController : MonoBehaviour, IPlayer
     public CharacterMovement2D CharacterMovement {get; private set; }
     public CharacterFacing2D CharacterFacing {get; private set;}
     
-    public WeaponAttack WeaponAttack {get; private set;}
+    public IWeapon WeaponAttack {get; private set;}
 
     private void Awake() 
     {
         CharacterMovement = GetComponent<CharacterMovement2D>();
         CharacterFacing = GetComponent<CharacterFacing2D>();
-        WeaponAttack = GetComponentInChildren<WeaponAttack>(true);
+        WeaponAttack = GetComponentInChildren<IWeapon>(true);
 
     }
 

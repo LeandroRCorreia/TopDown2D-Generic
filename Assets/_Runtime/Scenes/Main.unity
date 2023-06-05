@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f498855cdb9fbb04785c29ee4bf5073b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSeconds: 0.5
+  <AttackSeconds>k__BackingField: 0.5
 --- !u!4 &1633638983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5967337604792628173, guid: f538a5f7b4c99664e816c6ed1f92821f, type: 3}

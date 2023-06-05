@@ -1,13 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
-public class WeaponAttack : MonoBehaviour
+public interface IWeapon
+{
+    bool IsAttacking {get;}
+    float AttackSeconds {get;}
+
+    void OnAttackWeapon();
+
+}
+
+public class WeaponAttack : MonoBehaviour, IWeapon
 {
 
     private TriggerDamage triggerDamage;
-    [SerializeField] private float attackSeconds = 0.5f;
+    [field: SerializeField] public float AttackSeconds {get; private set;} = 0.5f;
     
-    private bool isAttacking;
+    public bool IsAttacking {get; private set;} = false;
 
     private void Awake() 
     {
@@ -16,14 +25,14 @@ public class WeaponAttack : MonoBehaviour
     
     public void OnAttackWeapon()
     {
-        if(isAttacking) return;
+        if(IsAttacking) return;
         gameObject.SetActive(true);
         StartCoroutine(PerformWeaponAttack());
     }
 
     private void StartWeapon()
     {
-        isAttacking = true;
+        IsAttacking = true;
         triggerDamage.gameObject.SetActive(true);
     }
 
@@ -31,7 +40,7 @@ public class WeaponAttack : MonoBehaviour
     {
         StartWeapon();
 
-        float finalAttackSeconds = Time.time + attackSeconds;
+        float finalAttackSeconds = Time.time + AttackSeconds;
         while(Time.time < finalAttackSeconds)
         {
             yield return null;
@@ -44,7 +53,7 @@ public class WeaponAttack : MonoBehaviour
     private void EndWeapon()
     {
         gameObject.SetActive(false);
-        isAttacking = false;
+        IsAttacking = false;
         triggerDamage.gameObject.SetActive(false);
 
     }
