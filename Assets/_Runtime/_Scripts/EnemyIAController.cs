@@ -19,7 +19,10 @@ public class EnemyIAController : MonoBehaviour, ICharacter
     {
         OnTakingDamage.OnTakeDamageEvent += OnTakeDamageEvent;
         StartCoroutine(PerformPatrol());    
+
     }
+
+
 
     private IEnumerator PerformPatrol()
     {
