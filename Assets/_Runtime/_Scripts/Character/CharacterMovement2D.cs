@@ -13,11 +13,17 @@ public class CharacterMovement2D : MonoBehaviour
 
 
     public float percentVelocityX => Mathf.Clamp01(Mathf.Abs(Velocity.x));
+
+
+    public void Movement(Vector3 input)
+    {
+        SetInput(input);
+        UpdateMovement();
+    }
     
 
     public void SetInput(Vector3 input)
     {
-
         targetVelocity = input * speed * Time.deltaTime;
     }
 

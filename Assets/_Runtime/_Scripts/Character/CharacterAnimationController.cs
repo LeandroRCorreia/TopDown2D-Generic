@@ -1,19 +1,18 @@
 using UnityEngine;
 
-public static class MovementStringsConstrains
+public static class CharacterStringsConstrains
 {
     public static readonly string velocityX = "velocityX";
 
 
 }
 
-[RequireComponent(typeof(PlayerController))]
-public class PlayerAnimationController : MonoBehaviour
+public class CharacterAnimationController : MonoBehaviour
 {
     private ICharacter character;
     protected Animator animator;
     //IDLE AND RUN
-    private int velocityX = Animator.StringToHash(MovementStringsConstrains.velocityX);
+    private int velocityX = Animator.StringToHash(CharacterStringsConstrains.velocityX);
 
     private void Awake() 
     {
