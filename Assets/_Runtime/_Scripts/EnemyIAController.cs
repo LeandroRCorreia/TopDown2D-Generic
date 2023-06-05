@@ -10,7 +10,12 @@ public class EnemyIAController : MonoBehaviour, ICharacter
     {
         CharacterMovement = GetComponent<CharacterMovement2D>();
         CharacterFacing = GetComponent<CharacterFacing2D>();
+    }
+
+    private void Start()
+    {
         StartCoroutine(PerformPatrol());    
+        
     }
 
     private IEnumerator PerformPatrol()
