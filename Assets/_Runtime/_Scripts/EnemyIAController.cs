@@ -6,10 +6,18 @@ public class EnemyIAController : MonoBehaviour, ICharacter
     public CharacterFacing2D CharacterFacing {get; private set;}
     public CharacterMovement2D CharacterMovement {get; private set;}
 
+    public OnTakeDamage OnTakingDamage {get; private set;}
+
     private void Awake() 
     {
         CharacterMovement = GetComponent<CharacterMovement2D>();
         CharacterFacing = GetComponent<CharacterFacing2D>();
+        OnTakingDamage = GetComponent<OnTakeDamage>();
+    }
+
+    private void Start() 
+    {
+        OnTakingDamage.OnTakeDamageEvent += OnTakeDamageEvent;
         StartCoroutine(PerformPatrol());    
     }
 
@@ -26,7 +34,6 @@ public class EnemyIAController : MonoBehaviour, ICharacter
             yield return MovementBy(Vector3.zero, durationIdle);
         }
 
-
     }
 
     private IEnumerator MovementBy(Vector3 input, float durationMovement)
@@ -36,8 +43,15 @@ public class EnemyIAController : MonoBehaviour, ICharacter
         {
             CharacterMovement.Movement(input);
             CharacterFacing.UpdateFacing(input);
+
             yield return null;
         }
+
+    }
+    
+    private void OnTakeDamageEvent()
+    {
+        Destroy(gameObject);
 
     }
 
