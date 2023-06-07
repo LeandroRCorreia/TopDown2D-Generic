@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a7c8ca992f915438a96c2077353778, type: 3}
+  m_Name: AI_Enemy_Skeleton
+  m_EditorClassIdentifier: 
+  brickName: Assets/_Runtime/AI/BTs/AI_Enemy_Skeleton.asset
+  xml: "\uFEFF<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<BehaviorBricks xmlns:ref=\"urn:padaone\"
+    version=\"1.0\">\r\n  <BehaviorTree id=\"0\" />\r\n  <runtimeInfo>\r\n    <BehaviorTree
+    id=\"0\" guid=\"8bac766b7d2cdb0428bda5d25764b30a\" nextId=\"17\">\r\n      <root>\r\n       
+    <PrioritySelectorNode id=\"12\" />\r\n      </root>\r\n      <inputParams>\r\n       
+    <inputValues>\r\n          <entry name=\"AiController\" type=\"EnemyIAController\"
+    isBlackboard=\"False\" />\r\n          <entry name=\"FieldOfView\" type=\"FieldOfView\"
+    isBlackboard=\"False\" />\r\n          <entry name=\"Target\" type=\"UnityEngine.Transform\"
+    isBlackboard=\"False\" />\r\n          <entry name=\"Muzzle\" type=\"UnityEngine.Transform\"
+    isBlackboard=\"False\" />\r\n          <entry name=\"DistanceToConsiderCloseEnough\"
+    type=\"System.Single\" isBlackboard=\"False\" value=\"0\" />\r\n          <entry
+    name=\"MeleeAttack\" type=\"IWeapon\" isBlackboard=\"False\" />\r\n         
+    <entry name=\"WeaponAttack\" type=\"WeaponAttack\" isBlackboard=\"False\" />\r\n       
+    </inputValues>\r\n      </inputParams>\r\n      <outputParams />\r\n      <localParams
+    />\r\n    </BehaviorTree>\r\n    <PrioritySelectorNode id=\"12\">\r\n      <children>\r\n       
+    <elem>\r\n          <GuardAndNode>\r\n            <guard>\r\n              <ConditionEvalNode
+    id=\"16\" />\r\n            </guard>\r\n            <child>\r\n             
+    <ActionNode id=\"15\" />\r\n            </child>\r\n          </GuardAndNode>\r\n       
+    </elem>\r\n        <elem>\r\n          <GuardAndNode>\r\n            <guard>\r\n             
+    <ConditionEvalNode id=\"13\" />\r\n            </guard>\r\n            <child>\r\n             
+    <ActionNode id=\"8\" />\r\n            </child>\r\n          </GuardAndNode>\r\n       
+    </elem>\r\n        <elem>\r\n          <GuardAndNode>\r\n            <guard>\r\n             
+    <ConditionEvalNode id=\"14\" />\r\n            </guard>\r\n            <child>\r\n             
+    <ActionNode id=\"4\" />\r\n            </child>\r\n          </GuardAndNode>\r\n       
+    </elem>\r\n      </children>\r\n      <inputParams />\r\n      <outputParams
+    />\r\n      <localParams />\r\n    </PrioritySelectorNode>\r\n    <ConditionEvalNode
+    id=\"16\" policy=\"WAIT_UNTIL_FALSE_AND_FAIL\" name=\"Game/Perception/IsCloseEnough\">\r\n     
+    <inputParams>\r\n        <inputValues>\r\n          <entry name=\"FieldOfView\"
+    type=\"FieldOfView\" isBlackboard=\"True\" blackboard=\"FieldOfView\" />\r\n         
+    <entry name=\"Target\" type=\"UnityEngine.Transform\" isBlackboard=\"True\" blackboard=\"Target\"
+    />\r\n          <entry name=\"DistanceToConsiderCloseEnough\" type=\"System.Single\"
+    isBlackboard=\"True\" blackboard=\"DistanceToConsiderCloseEnough\" />\r\n       
+    </inputValues>\r\n      </inputParams>\r\n      <outputParams />\r\n      <localParams
+    />\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"15\" action=\"Game/Attacks/TriggerToMeleeAttack\">\r\n     
+    <inputParams>\r\n        <inputValues>\r\n          <entry name=\"IWeapon\" type=\"IWeapon\"
+    isBlackboard=\"True\" blackboard=\"MeleeAttack\" />\r\n          <entry name=\"AiController\"
+    type=\"EnemyIAController\" isBlackboard=\"True\" blackboard=\"AiController\"
+    />\r\n          <entry name=\"WeaponAttack\" type=\"WeaponAttack\" isBlackboard=\"True\"
+    blackboard=\"WeaponAttack\" />\r\n        </inputValues>\r\n      </inputParams>\r\n     
+    <outputParams />\r\n      <localParams />\r\n    </ActionNode>\r\n    <ConditionEvalNode
+    id=\"13\" policy=\"WAIT_UNTIL_FALSE_AND_FAIL\" name=\"Game/Perception/IsTargetVisible\">\r\n     
+    <inputParams>\r\n        <inputValues>\r\n          <entry name=\"Target\" type=\"UnityEngine.Transform\"
+    isBlackboard=\"True\" blackboard=\"Target\" />\r\n          <entry name=\"Muzzle\"
+    type=\"UnityEngine.Transform\" isBlackboard=\"True\" blackboard=\"Muzzle\" />\r\n         
+    <entry name=\"FieldOfView\" type=\"FieldOfView\" isBlackboard=\"True\" blackboard=\"FieldOfView\"
+    />\r\n        </inputValues>\r\n      </inputParams>\r\n      <outputParams />\r\n     
+    <localParams />\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"8\" action=\"Game/ChaseTarget\">\r\n     
+    <inputParams>\r\n        <inputValues>\r\n          <entry name=\"Target\" type=\"UnityEngine.Transform\"
+    isBlackboard=\"True\" blackboard=\"Target\" />\r\n          <entry name=\"AiController\"
+    type=\"EnemyIAController\" isBlackboard=\"True\" blackboard=\"AiController\"
+    />\r\n        </inputValues>\r\n      </inputParams>\r\n      <outputParams />\r\n     
+    <localParams />\r\n    </ActionNode>\r\n    <ConditionEvalNode id=\"14\" policy=\"WAIT_UNTIL_FALSE_AND_FAIL\"
+    name=\"AlwaysTrue\">\r\n      <inputParams />\r\n      <outputParams />\r\n     
+    <localParams />\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"4\" action=\"Game/Patrol\">\r\n     
+    <inputParams>\r\n        <inputValues>\r\n          <entry name=\"AiController\"
+    type=\"EnemyIAController\" isBlackboard=\"True\" blackboard=\"AiController\"
+    />\r\n        </inputValues>\r\n      </inputParams>\r\n      <outputParams />\r\n     
+    <localParams />\r\n    </ActionNode>\r\n  </runtimeInfo>\r\n  <editorInfo>\r\n   
+    <BehaviorTree id=\"0\" _name=\"AI_Enemy_Skeleton\" _description=\"\" _removeIfClosed=\"False\">\r\n     
+    <_rootList>\r\n        <elem>\r\n          <ActionNode id=\"4\" />\r\n       
+    </elem>\r\n        <elem>\r\n          <ActionNode id=\"8\" />\r\n        </elem>\r\n       
+    <elem>\r\n          <PrioritySelectorNode id=\"12\" />\r\n        </elem>\r\n       
+    <elem>\r\n          <ConditionEvalNode id=\"13\" />\r\n        </elem>\r\n       
+    <elem>\r\n          <ConditionEvalNode id=\"14\" />\r\n        </elem>\r\n       
+    <elem>\r\n          <ActionNode id=\"15\" />\r\n        </elem>\r\n        <elem>\r\n         
+    <ConditionEvalNode id=\"16\" />\r\n        </elem>\r\n      </_rootList>\r\n     
+    <_nodes>\r\n        <nodes>\r\n          <ConditionEvalNode id=\"14\" />\r\n         
+    <ActionNode id=\"4\" />\r\n          <PrioritySelectorNode id=\"12\" />\r\n         
+    <ActionNode id=\"8\" />\r\n          <ConditionEvalNode id=\"13\" />\r\n         
+    <ActionNode id=\"15\" />\r\n          <ConditionEvalNode id=\"16\" />\r\n       
+    </nodes>\r\n      </_nodes>\r\n    </BehaviorTree>\r\n    <PrioritySelectorNode
+    id=\"12\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
+    position=\"508.5856 267.7428\" name=\"Priority Selector\" description=\"\" cardinality=\"1\"
+    hasParent=\"False\">\r\n          <BehaviorTree id=\"0\" />\r\n          <PrioritySelectorNode
+    id=\"12\" />\r\n        </data>\r\n      </_data>\r\n    </PrioritySelectorNode>\r\n   
+    <ConditionEvalNode id=\"16\">\r\n      <_data>\r\n        <data breakpoint=\"0\"
+    selected=\"False\" position=\"590.8141 855.8\" name=\"Game/Perception/IsCloseEnough\"
+    description=\"Eval\" cardinality=\"1\" hasParent=\"True\">\r\n          <BehaviorTree
+    id=\"0\" />\r\n          <ConditionEvalNode id=\"16\" />\r\n          <PrioritySelectorNode
+    id=\"12\" />\r\n        </data>\r\n      </_data>\r\n    </ConditionEvalNode>\r\n   
+    <ActionNode id=\"15\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
+    position=\"272.414 494.2\" name=\"Game/Attacks/TriggerToMeleeAttack\" description=\"\"
+    cardinality=\"0\" hasParent=\"False\">\r\n          <BehaviorTree id=\"0\" />\r\n         
+    <ActionNode id=\"15\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n   
+    <ConditionEvalNode id=\"13\">\r\n      <_data>\r\n        <data breakpoint=\"0\"
+    selected=\"False\" position=\"869.1229 626.9194\" name=\"Game/Perception/IsTargetVisible\"
+    description=\"Eval\" cardinality=\"1\" hasParent=\"True\">\r\n          <BehaviorTree
+    id=\"0\" />\r\n          <ConditionEvalNode id=\"13\" />\r\n          <PrioritySelectorNode
+    id=\"12\" />\r\n        </data>\r\n      </_data>\r\n    </ConditionEvalNode>\r\n   
+    <ActionNode id=\"8\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
+    position=\"700.3617 492.9378\" name=\"Game/ChaseTarget\" description=\"\" cardinality=\"0\"
+    hasParent=\"False\">\r\n          <BehaviorTree id=\"0\" />\r\n          <ActionNode
+    id=\"8\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n   
+    <ConditionEvalNode id=\"14\">\r\n      <_data>\r\n        <data breakpoint=\"0\"
+    selected=\"False\" position=\"1282.672 625.2994\" name=\"AlwaysTrue\" description=\"Eval\"
+    cardinality=\"1\" hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n         
+    <ConditionEvalNode id=\"14\" />\r\n          <PrioritySelectorNode id=\"12\"
+    />\r\n        </data>\r\n      </_data>\r\n    </ConditionEvalNode>\r\n    <ActionNode
+    id=\"4\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
+    position=\"967.3029 490.6039\" name=\"Game/Patrol\" description=\"\" cardinality=\"0\"
+    hasParent=\"False\">\r\n          <BehaviorTree id=\"4\" />\r\n        </data>\r\n     
+    </_data>\r\n    </ActionNode>\r\n  </editorInfo>\r\n  <runtimeInfo>\r\n    <BehaviorTree
+    id=\"4\" nextId=\"1\">\r\n      <inputParams />\r\n      <outputParams />\r\n     
+    <localParams />\r\n    </BehaviorTree>\r\n  </runtimeInfo>\r\n  <editorInfo>\r\n   
+    <BehaviorTree id=\"4\" _removeIfClosed=\"False\">\r\n      <_rootList />\r\n     
+    <_nodes>\r\n        <nodes />\r\n      </_nodes>\r\n    </BehaviorTree>\r\n 
+    </editorInfo>\r\n</BehaviorBricks>"
+  zoom: 0.5
+  subslist: []
+  _guid: 8bac766b7d2cdb0428bda5d25764b30a

@@ -1,20 +1,13 @@
 using UnityEngine;
 
-
 public class CharacterFacing2D : MonoBehaviour
 {
-    public bool IsFacingRight => !sprite.flipX; 
+    public bool IsFacingRight {get; private set;} = true;
 
-    private SpriteRenderer sprite;
-
-    private void Awake() 
-    {
-        sprite = GetComponentInChildren<SpriteRenderer>();    
-    }
 
     public void UpdateFacing(Vector3 input)
     {
-        if(input.x > 0 && sprite.flipX || input.x < 0 && !sprite.flipX)
+        if(input.x > 0 && IsFacingRight || input.x < 0 && !IsFacingRight)
         {
             FlipSprite();
         }
@@ -22,7 +15,8 @@ public class CharacterFacing2D : MonoBehaviour
 
     private void FlipSprite()
     {
-        sprite.flipX = !sprite.flipX;
+        transform.rotation = IsFacingRight ? Quaternion.identity : new Quaternion(0, 180, 0, 0); 
+        IsFacingRight = !IsFacingRight; 
     }
 
 }
