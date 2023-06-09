@@ -27,12 +27,8 @@ public class TriggerToMeleeAttack : BasePrimitiveAction
         TaskStatus currentTaskStatus = TaskStatus.RUNNING; 
         Debug.Log("OnUpdate: Attacking melee");
 
-        if(!weaponAttack.IsAttacking)
-        {
-            Debug.Log("Attacando");
-            AiController.input = Vector3.zero;
-            weaponAttack.OnAttackWeapon();
-        }
+        AiController.input = Vector3.zero;
+        weaponAttack.OnAttackWeapon();
 
         return currentTaskStatus;
     }

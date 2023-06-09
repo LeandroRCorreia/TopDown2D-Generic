@@ -504,7 +504,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1711468083223456917, guid: 93cb9a8fa72fd70469d8c85e6aebef2a, type: 3}
       propertyPath: <AttackSeconds>k__BackingField
-      value: 2
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711468083223456917, guid: 93cb9a8fa72fd70469d8c85e6aebef2a, type: 3}
+      propertyPath: <AttackCooldown>k__BackingField
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711468083223456917, guid: 93cb9a8fa72fd70469d8c85e6aebef2a, type: 3}
+      propertyPath: <AttackDuration>k__BackingField
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93cb9a8fa72fd70469d8c85e6aebef2a, type: 3}
@@ -885,12 +893,12 @@ GameObject:
   - component: {fileID: 1854667794}
   - component: {fileID: 1854667793}
   - component: {fileID: 1854667788}
-  - component: {fileID: 1854667791}
   - component: {fileID: 1854667790}
   - component: {fileID: 1854667789}
   - component: {fileID: 1854667792}
   - component: {fileID: 1854667795}
   - component: {fileID: 1854667796}
+  - component: {fileID: 1854667797}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -906,9 +914,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854667786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.3, y: -2.16, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 6.99, y: -2.21, z: 0}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1665554204}
   - {fileID: 1633638983}
@@ -954,18 +962,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa7da1299afd7f4d94c5698a7a4f770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1854667791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854667786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f19c2eb06780249b4c3f0bc150c9ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1854667792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,10 +990,10 @@ BoxCollider2D:
   m_Offset: {x: -0.2447555, y: 0.8444066}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2.6875, y: 2.3125}
+    newSize: {x: 2.6875, y: 2.3125}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -1049,7 +1045,7 @@ MonoBehaviour:
     boolParamsNames: []
     boolParamsLostDefaultValue: 
     floatParams:
-    - 2
+    - 1.75
     floatParamsNames:
     - DistanceToConsiderCloseEnough
     floatParamsLostDefaultValue: 
@@ -1115,8 +1111,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1234301906}
   angleDegress: 90
-  viewDistance: 4
+  viewDistance: 6
   muzzle: {fileID: 1966046163}
+--- !u!114 &1854667797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854667786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e91dfbe3b7d6742927c3fdc9010475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 1305444265}
 --- !u!1 &1966046162
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class IsTargetVisible : ConditionBase
     [InParam("FieldOfView")]
     private FieldOfView field;
 
-    private float maxDurationToForgetTarget = 3f;
+    private float maxDurationToForgetTarget = 5f;
 
 
     private Vector3 TargetPosition => target.position;

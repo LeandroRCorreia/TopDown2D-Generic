@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public interface IWeapon
 {
     bool IsAttacking {get;}
-    float AttackSeconds {get;}
+    float AttackDuration {get;}
+    float AttackCooldown {get;}
 
     void OnAttackWeapon();
 
@@ -12,11 +14,16 @@ public interface IWeapon
 
 public class WeaponAttack : MonoBehaviour, IWeapon
 {
-
     private TriggerDamage triggerDamage;
-    [field: SerializeField] public float AttackSeconds {get; private set;} = 0.5f;
+    private float lastAttackTime = 0;
+    [field: SerializeField] public float AttackDuration {get; private set;} = 1f;
     
     public bool IsAttacking {get; private set;} = false;
+
+    [field: SerializeField] public float AttackCooldown {get; private set; } = 1.5f;
+
+
+    public bool IsAttackFresh => Time.time >= lastAttackTime + AttackCooldown;
 
     private void Awake() 
     {
@@ -25,7 +32,7 @@ public class WeaponAttack : MonoBehaviour, IWeapon
     
     public void OnAttackWeapon()
     {
-        if(IsAttacking) return;
+        if(IsAttacking || !IsAttackFresh) return;
         gameObject.SetActive(true);
         StartCoroutine(PerformWeaponAttack());
     }
@@ -40,7 +47,7 @@ public class WeaponAttack : MonoBehaviour, IWeapon
     {
         StartWeapon();
 
-        float finalAttackSeconds = Time.time + AttackSeconds;
+        float finalAttackSeconds = Time.time + AttackDuration;
         while(Time.time < finalAttackSeconds)
         {
             yield return null;
@@ -55,6 +62,8 @@ public class WeaponAttack : MonoBehaviour, IWeapon
         gameObject.SetActive(false);
         IsAttacking = false;
         triggerDamage.gameObject.SetActive(false);
+        lastAttackTime = Time.time;
+
 
     }
 

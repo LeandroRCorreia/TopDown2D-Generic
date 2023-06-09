@@ -28,7 +28,6 @@ public class ChaseTarget : GOAction
     {
         Debug.Log("OnUpdate: ChaseTarget");
         var toTargetX = Mathf.Sign((target.position.x - gameObject.transform.position.x));
-        Debug.Log(toTargetX);
         enemyIAController.input = new Vector3(toTargetX, 0, 0);
 
         return TaskStatus.RUNNING;

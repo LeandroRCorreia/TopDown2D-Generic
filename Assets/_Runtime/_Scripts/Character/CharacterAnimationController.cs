@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class CharacterStringsConstrains
 {
-    public static readonly string velocityX = "velocityX";
+    public static readonly string velocityX = "SpeedX";
 
 
 }
@@ -20,10 +20,14 @@ public class CharacterAnimationController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    private void LateUpdate() 
+    protected virtual void LateUpdate() 
+    {
+        MovementAnimator();
+    }
+
+    protected virtual void MovementAnimator()
     {
         animator.SetFloat(velocityX, character.CharacterMovement.percentVelocityX);
     }
-
 
 }
