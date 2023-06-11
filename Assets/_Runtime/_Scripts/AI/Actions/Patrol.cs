@@ -1,47 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
 using Pada1.BBCore;
 using Pada1.BBCore.Framework;
 using Pada1.BBCore.Tasks;
 using UnityEngine;
-
 
 [Action("Game/Patrol")]
 public class Patrol : BasePrimitiveAction
 {
 
     [InParam("AiController")]
-    EnemyIAController enemyIAController;
+    private EnemyIAController enemyIAController;
+
+    [InParam("HasPlatformInFront")]
+    private HasPlatformInFront hasPlatformInFront;
+
+    private Vector3 input;
 
     public override void OnStart()
     {
         base.OnStart();
-        enemyIAController.StartCoroutine(PerformPatrol());    
-
+        input = Vector3.right;
 
     }
 
     public override TaskStatus OnUpdate()
     {
-
+        if(!hasPlatformInFront.HasPlatformFront() || hasPlatformInFront.HasWallInFront())
+        {
+            input = input * -1;
+        }
+        enemyIAController.input =  input;
 
         return TaskStatus.RUNNING;
-
     }
-
 
     public override void OnEnd()
     {
         base.OnEnd();
-        enemyIAController.StopAllCoroutines();
     }
 
     public override void OnAbort()
     {
         base.OnAbort();
-        enemyIAController.StopAllCoroutines();
     }
-
+    
     private IEnumerator PerformPatrol()
     {
         var durationPatrol = 2f;

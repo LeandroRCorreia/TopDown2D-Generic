@@ -23,7 +23,7 @@ public class IsCloseEnough : GOCondition
         var myPosition = gameObject.transform.position;
         var distanceQuadratic = distanceCloseEnough * distanceCloseEnough;
         var isCloseEnoughToTarget = (target.position - myPosition).sqrMagnitude < distanceQuadratic;
-        var isFacingAtTarget = fieldOfView.IsFacingAtTarget(target, gameObject.transform);
+        var isFacingAtTarget = fieldOfView.IsFacingAtTarget(target);
         Debug.Log($"Check: IsCloseEnough: {isCloseEnoughToTarget && isFacingAtTarget}");
 
         return isCloseEnoughToTarget && isFacingAtTarget;

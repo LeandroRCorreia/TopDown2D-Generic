@@ -14,6 +14,7 @@ public interface IWeapon
 
 public class WeaponAttack : MonoBehaviour, IWeapon
 {
+    [SerializeField] private CharacterFacing2D characterFacing;
     private TriggerDamage triggerDamage;
     private float lastAttackTime = 0;
     [field: SerializeField] public float AttackDuration {get; private set;} = 1f;
@@ -24,6 +25,8 @@ public class WeaponAttack : MonoBehaviour, IWeapon
 
 
     public bool IsAttackFresh => Time.time >= lastAttackTime + AttackCooldown;
+
+    
 
     private void Awake() 
     {
@@ -40,7 +43,20 @@ public class WeaponAttack : MonoBehaviour, IWeapon
     private void StartWeapon()
     {
         IsAttacking = true;
+        Vector3 attackPosition = DecidingAttackDir();
+        transform.localPosition = attackPosition;
         triggerDamage.gameObject.SetActive(true);
+    }
+
+    private Vector3 DecidingAttackDir()
+    {
+        Vector3 attackPosition = transform.localPosition;
+        if(Mathf.Sign(transform.localPosition.x) != Mathf.Sign(characterFacing.GetCharacterFacingDirection().x))
+        {
+            attackPosition.x = transform.localPosition.x * -1;
+        }
+
+        return attackPosition;
     }
 
     private IEnumerator PerformWeaponAttack()

@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f498855cdb9fbb04785c29ee4bf5073b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AttackSeconds>k__BackingField: 0.5
+  characterFacing: {fileID: 0}
+  <AttackDuration>k__BackingField: 1.5
+  <AttackCooldown>k__BackingField: 0.75
 --- !u!1001 &4976590598208039023
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,18 +4,29 @@ public class CharacterFacing2D : MonoBehaviour
 {
     public bool IsFacingRight {get; private set;} = true;
 
+    private SpriteRenderer sprite;
+
+    private void Awake() 
+    {
+        sprite = GetComponentInChildren<SpriteRenderer>();    
+    }
 
     public void UpdateFacing(Vector3 input)
     {
-        if(input.x > 0 && IsFacingRight || input.x < 0 && !IsFacingRight)
+        if(input.x > 0 && !IsFacingRight || input.x < 0 && IsFacingRight)
         {
             FlipSprite();
         }
     }
 
+    public Vector3 GetCharacterFacingDirection()
+    {
+        return IsFacingRight ? Vector3.right : Vector3.left;
+    }
+
     private void FlipSprite()
     {
-        transform.rotation = IsFacingRight ? Quaternion.identity : new Quaternion(0, 180, 0, 0); 
+        sprite.flipX = !sprite.flipX;
         IsFacingRight = !IsFacingRight; 
     }
 

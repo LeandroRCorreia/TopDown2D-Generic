@@ -22,33 +22,22 @@ public class IsTargetVisible : ConditionBase
     private Vector3 TargetPosition => target.position;
     private Vector3 MuzzlePosition => muzzle.position;
 
-
-    private bool wasInField = false;
-    private float timeAtlastFrameInField = 0;
+    private float timeAtlastFrameInField = -Mathf.Infinity;
 
     public override bool Check()
     {
         var isInField = field.IsInsideFieldOfView2D(target);
-        
-        if(!isInField && wasInField)
-        {   
-            return Time.time < timeAtlastFrameInField + maxDurationToForgetTarget;
-        }
-        else if(isInField)
+        if(isInField)
         {
             timeAtlastFrameInField = Time.time;
-            wasInField = isInField;
         }
 
-        return isInField;
+        return isInField || Time.time < timeAtlastFrameInField + maxDurationToForgetTarget;
     }
-
 
     public override void OnAbort()
     {
         base.OnAbort();
-
-        wasInField = false;
         timeAtlastFrameInField = 0;
     }
 
