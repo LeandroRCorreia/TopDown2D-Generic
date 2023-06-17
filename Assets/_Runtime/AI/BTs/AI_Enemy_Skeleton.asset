@@ -130,37 +130,37 @@ MonoBehaviour:
     <BehaviorTree id=\"0\" />\r\n          <PrioritySelectorNode id=\"25\" />\r\n       
     </data>\r\n      </_data>\r\n    </PrioritySelectorNode>\r\n    <ConditionEvalNode
     id=\"14\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
-    position=\"1171.888 282.5855\" name=\"AlwaysTrue\" description=\"Eval\" cardinality=\"1\"
+    position=\"1171.888 280.5855\" name=\"AlwaysTrue\" description=\"Eval\" cardinality=\"1\"
     hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <ConditionEvalNode
     id=\"14\" />\r\n          <PrioritySelectorNode id=\"12\" />\r\n        </data>\r\n     
     </_data>\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"4\">\r\n      <_data>\r\n       
-    <data breakpoint=\"0\" selected=\"False\" position=\"856.5177 147.8899\" name=\"Game/Patrol\"
+    <data breakpoint=\"0\" selected=\"False\" position=\"856.5177 145.8899\" name=\"Game/Patrol\"
     description=\"\" cardinality=\"0\" hasParent=\"False\">\r\n          <BehaviorTree
     id=\"4\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n   
     <ConditionEvalNode id=\"28\">\r\n      <_data>\r\n        <data breakpoint=\"0\"
-    selected=\"False\" position=\"365.4429 1033.843\" name=\"Game/Perception/IsCloseEnough\"
+    selected=\"True\" position=\"437.4429 983.843\" name=\"Game/Perception/IsCloseEnough\"
     description=\"Eval\" cardinality=\"1\" hasParent=\"True\">\r\n          <BehaviorTree
     id=\"0\" />\r\n          <ConditionEvalNode id=\"28\" />\r\n          <PrioritySelectorNode
     id=\"25\" />\r\n        </data>\r\n      </_data>\r\n    </ConditionEvalNode>\r\n   
     <ActionNode id=\"22\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
-    position=\"163.043 500.243\" name=\"Game/Attacks/TriggerToMeleeAttack\" description=\"\"
+    position=\"235.043 450.243\" name=\"Game/Attacks/TriggerToMeleeAttack\" description=\"\"
     cardinality=\"0\" hasParent=\"False\">\r\n          <BehaviorTree id=\"22\" />\r\n       
     </data>\r\n      </_data>\r\n    </ActionNode>\r\n    <ConditionEvalNode id=\"27\">\r\n     
-    <_data>\r\n        <data breakpoint=\"0\" selected=\"True\" position=\"1053.939
-    785.5198\" name=\"Game/Perception/IsAttackingDone\" description=\"Eval\" cardinality=\"1\"
+    <_data>\r\n        <data breakpoint=\"0\" selected=\"False\" position=\"1083.939
+    779.5198\" name=\"Game/Perception/IsAttackingDone\" description=\"Eval\" cardinality=\"1\"
     hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <ConditionEvalNode
     id=\"27\" />\r\n          <PrioritySelectorNode id=\"25\" />\r\n        </data>\r\n     
     </_data>\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"8\">\r\n      <_data>\r\n       
-    <data breakpoint=\"0\" selected=\"False\" position=\"581.8614 477.9381\" name=\"Game/ChaseTarget\"
+    <data breakpoint=\"0\" selected=\"False\" position=\"611.8614 471.9381\" name=\"Game/ChaseTarget\"
     description=\"\" cardinality=\"0\" hasParent=\"False\">\r\n          <BehaviorTree
     id=\"8\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n   
     <ConditionEvalNode id=\"35\">\r\n      <_data>\r\n        <data breakpoint=\"0\"
-    selected=\"False\" position=\"1885.444 1011.842\" name=\"AlwaysTrue\" description=\"Eval\"
+    selected=\"False\" position=\"1885.444 973.842\" name=\"AlwaysTrue\" description=\"Eval\"
     cardinality=\"1\" hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n         
     <ConditionEvalNode id=\"35\" />\r\n          <PrioritySelectorNode id=\"25\"
     />\r\n        </data>\r\n      </_data>\r\n    </ConditionEvalNode>\r\n    <ActionNode
     id=\"34\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
-    position=\"879.0427 516.243\" name=\"Samples/ProgQuickStartGuide/SleepForever\"
+    position=\"879.0427 478.243\" name=\"Samples/ProgQuickStartGuide/SleepForever\"
     description=\"Low-cost infinite action that never ends. It does not consume CPU
     at all.\" cardinality=\"0\" hasParent=\"False\">\r\n          <BehaviorTree id=\"0\"
     />\r\n          <ActionNode id=\"34\" />\r\n        </data>\r\n      </_data>\r\n   
