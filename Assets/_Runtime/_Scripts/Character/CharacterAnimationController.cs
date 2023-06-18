@@ -12,9 +12,9 @@ public class CharacterAnimationController : MonoBehaviour
     private ICharacter character;
     protected Animator animator;
     //IDLE AND RUN
-    private int velocityX = Animator.StringToHash(CharacterStringsConstrains.velocityX);
+    private int VelocityX => Animator.StringToHash(CharacterStringsConstrains.velocityX);
 
-    private void Awake() 
+    protected virtual void Awake() 
     {
         character = GetComponent<ICharacter>();
         animator = GetComponentInChildren<Animator>();
@@ -27,7 +27,7 @@ public class CharacterAnimationController : MonoBehaviour
 
     protected virtual void MovementAnimator()
     {
-        animator.SetFloat(velocityX, character.CharacterMovement.percentVelocityX);
+        animator.SetFloat(VelocityX, character.CharacterMovement.percentVelocityX);
     }
 
 }
