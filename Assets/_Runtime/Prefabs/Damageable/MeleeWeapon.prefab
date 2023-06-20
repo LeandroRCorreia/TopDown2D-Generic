@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterFacing: {fileID: 0}
-  <AttackDuration>k__BackingField: 1.5
+  <AttackDuration>k__BackingField: 0.5
   <AttackCooldown>k__BackingField: 0.75
+  animationWeaponTrigger: {fileID: 0}
 --- !u!1001 &4976590598208039023
 PrefabInstance:
   m_ObjectHideFlags: 0

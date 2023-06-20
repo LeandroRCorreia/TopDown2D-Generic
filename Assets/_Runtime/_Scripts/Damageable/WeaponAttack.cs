@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public interface IWeapon
 {
@@ -23,40 +24,50 @@ public class WeaponAttack : MonoBehaviour, IWeapon
 
     [field: SerializeField] public float AttackCooldown {get; private set; } = 1.5f;
 
+    public bool IsAttackReady => Time.time >= lastAttackTime + AttackCooldown;
 
-    public bool IsAttackFresh => Time.time >= lastAttackTime + AttackCooldown;
-
-    
+    [SerializeField] AnimationTriggerWeapon animationTriggerWeapon;
 
     private void Awake() 
     {
         triggerDamage = GetComponentInChildren<TriggerDamage>(true);
+        animationTriggerWeapon.OnTriggerDamage += OntriggerDamageEvent;
+        
+    }
+
+    private void Start() 
+    {
+        Assert.IsNotNull(animationTriggerWeapon, "AnimationTriggerWeapon cannot be null");
+        Assert.IsNotNull(triggerDamage, "TriggerDamage cannot be null");
+        Assert.IsNotNull(characterFacing, "CharacterFacing cannot be null");
+        gameObject.SetActive(true);
+        triggerDamage.gameObject.SetActive(false);
     }
     
     public void OnAttackWeapon()
     {
-        if(IsAttacking || !IsAttackFresh) return;
+        if(IsAttacking || !IsAttackReady) return;
+
         gameObject.SetActive(true);
         StartCoroutine(PerformWeaponAttack());
     }
 
     private void StartWeapon()
     {
+        Vector3 DecidingAttackDir()
+        {
+            Vector3 attackPosition = transform.localPosition;
+            if(Mathf.Sign(transform.localPosition.x) != Mathf.Sign(characterFacing.GetCharacterFacingDirection().x))
+            {
+                attackPosition.x = transform.localPosition.x * -1;
+            }
+
+            return attackPosition;
+        }
+
         IsAttacking = true;
         Vector3 attackPosition = DecidingAttackDir();
         transform.localPosition = attackPosition;
-        triggerDamage.gameObject.SetActive(true);
-    }
-
-    private Vector3 DecidingAttackDir()
-    {
-        Vector3 attackPosition = transform.localPosition;
-        if(Mathf.Sign(transform.localPosition.x) != Mathf.Sign(characterFacing.GetCharacterFacingDirection().x))
-        {
-            attackPosition.x = transform.localPosition.x * -1;
-        }
-
-        return attackPosition;
     }
 
     private IEnumerator PerformWeaponAttack()
@@ -64,6 +75,7 @@ public class WeaponAttack : MonoBehaviour, IWeapon
         StartWeapon();
 
         float finalAttackSeconds = Time.time + AttackDuration;
+
         while(Time.time < finalAttackSeconds)
         {
             yield return null;
@@ -72,14 +84,23 @@ public class WeaponAttack : MonoBehaviour, IWeapon
         EndWeapon();
     }
 
+    private void OntriggerDamageEvent()
+    {
+
+        triggerDamage.gameObject.SetActive(true);
+    }
 
     private void EndWeapon()
     {
-        gameObject.SetActive(false);
         IsAttacking = false;
         triggerDamage.gameObject.SetActive(false);
         lastAttackTime = Time.time;
 
+    }
+
+    private void OnDestroy() 
+    {
+        animationTriggerWeapon.OnTriggerDamage -= OntriggerDamageEvent;
 
     }
 

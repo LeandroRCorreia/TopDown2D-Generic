@@ -33,7 +33,7 @@ public class EnemyIAController : MonoBehaviour, ICharacter
     
     private void OnTakeDamageEvent()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
 
     }
 

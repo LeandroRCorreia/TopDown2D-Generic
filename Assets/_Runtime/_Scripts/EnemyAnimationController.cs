@@ -22,6 +22,7 @@ public class EnemyAnimationController : CharacterAnimationController
     protected sealed override void LateUpdate() 
     {
         base.LateUpdate();
+        
         animator.SetBool(IsAttacking, weapon.IsAttacking);
 
     }

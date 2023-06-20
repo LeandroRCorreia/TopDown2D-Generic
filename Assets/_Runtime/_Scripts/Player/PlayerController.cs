@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour, IPlayer
     private Vector3 playerInput;
     public CharacterMovement2D CharacterMovement {get; private set; }
     public CharacterFacing2D CharacterFacing {get; private set;}
-    
+    public IDamageable OnTakeDamage {get; private set;}
     public IWeapon WeaponAttack {get; private set;}
 
     private void Awake() 
@@ -39,7 +39,9 @@ public class PlayerController : MonoBehaviour, IPlayer
             AttackWeapon();
         }
         CharacterMovement.SetInput(playerInput);
-        CharacterFacing.UpdateFacing(playerInput);
+
+        if(!WeaponAttack.IsAttacking) 
+            CharacterFacing.UpdateFacing(playerInput);
 
     }
 
