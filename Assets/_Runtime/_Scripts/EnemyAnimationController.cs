@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MeleeAttackStringsConstants
-{
-    public static readonly string AttackMultiplier = "AttackMultiplier";
-    public static readonly string IsAttacking = "IsAttacking";
 
-}
 
 public class EnemyAnimationController : CharacterAnimationController
 {

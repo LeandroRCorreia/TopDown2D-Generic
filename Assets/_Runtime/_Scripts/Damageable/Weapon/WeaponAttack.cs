@@ -3,13 +3,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public interface IWeapon
+public static class MeleeAttackStringsConstants
 {
-    bool IsAttacking {get;}
-    float AttackDuration {get;}
-    float AttackCooldown {get;}
-
-    void OnAttackWeapon();
+    public static readonly string AttackMultiplier = "AttackMultiplier";
+    public static readonly string IsAttacking = "IsAttacking";
 
 }
 
@@ -24,20 +21,20 @@ public class WeaponAttack : MonoBehaviour, IWeapon
 
     [field: SerializeField] public float AttackCooldown {get; private set; } = 1.5f;
 
-    public bool IsAttackReady => Time.time >= lastAttackTime + AttackCooldown;
+    private bool IsAttackReady => Time.time >= lastAttackTime + AttackCooldown;
 
-    [SerializeField] AnimationTriggerWeapon animationTriggerWeapon;
+    [SerializeField] private AnimationEventWeapon animationEventWeapon;
 
     private void Awake() 
     {
         triggerDamage = GetComponentInChildren<TriggerDamage>(true);
-        animationTriggerWeapon.OnTriggerDamage += OntriggerDamageEvent;
+        animationEventWeapon.OnTriggerDamage += OntriggerDamageEvent;
         
     }
 
     private void Start() 
     {
-        Assert.IsNotNull(animationTriggerWeapon, "AnimationTriggerWeapon cannot be null");
+        Assert.IsNotNull(animationEventWeapon, "AnimationTriggerWeapon cannot be null");
         Assert.IsNotNull(triggerDamage, "TriggerDamage cannot be null");
         Assert.IsNotNull(characterFacing, "CharacterFacing cannot be null");
         gameObject.SetActive(true);
@@ -86,7 +83,6 @@ public class WeaponAttack : MonoBehaviour, IWeapon
 
     private void OntriggerDamageEvent()
     {
-
         triggerDamage.gameObject.SetActive(true);
     }
 
@@ -100,7 +96,7 @@ public class WeaponAttack : MonoBehaviour, IWeapon
 
     private void OnDestroy() 
     {
-        animationTriggerWeapon.OnTriggerDamage -= OntriggerDamageEvent;
+        animationEventWeapon.OnTriggerDamage -= OntriggerDamageEvent;
 
     }
 

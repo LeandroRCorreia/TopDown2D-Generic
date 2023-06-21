@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationTriggerWeapon : MonoBehaviour
+public class AnimationEventWeapon : MonoBehaviour
 {
 
     public event Action OnTriggerDamage;

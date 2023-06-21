@@ -8,12 +8,19 @@ public class PlayerAnimationController : CharacterAnimationController
 
     private IDamageable damageable;
 
+
     protected override void Awake() 
     {
         base.Awake();
         playerController = GetComponent<PlayerController>();
         damageable = GetComponent<IDamageable>();
         damageable.OnTakeDamageEvent += OnTakeDamage;
+
+    }
+
+    private void Start() 
+    {
+        
 
     }
 
@@ -26,8 +33,6 @@ public class PlayerAnimationController : CharacterAnimationController
 
     private void OnTakeDamage()
     {
-
-        
 
     }
 
