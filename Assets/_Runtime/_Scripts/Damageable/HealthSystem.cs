@@ -50,26 +50,4 @@ public class HealthSystem : MonoBehaviour
         _currenthealth = MaxHealth;
     }
 
-
-    private void Update() 
-    {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("Max health totally filled");
-            CurrentHealthValue = -MaxHealth;
-        }
-
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            CurrentHealthValue = 5;
-
-        }
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            CurrentHealthValue = MaxHealth;
-        }
-
-
-    }
-
 }
