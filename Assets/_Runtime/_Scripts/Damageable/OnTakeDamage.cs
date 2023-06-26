@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class OnTakeDamage : MonoBehaviour, IDamageable
 {
-    public bool IsInvincible {get; private set;}
 
-    public event System.Action OnTakeDamageEvent;
-
+    private HealthSystem healthSystem;
 
     [Header("Invincible Params")]
     [Range(0.05f, 2f)] [SerializeField] private float timeInvincible = 0.1f;
@@ -17,14 +15,20 @@ public class OnTakeDamage : MonoBehaviour, IDamageable
 
     private SpriteRenderer sprite;
 
+    public bool IsInvincible {get; private set;}
+    public event System.Action OnTakeDamageEvent;
+
     private void Awake() 
     {
         sprite = GetComponentInChildren<SpriteRenderer>();
+        healthSystem = GetComponent<HealthSystem>();
     }
 
-    public void TakingDamage()
+    public void TakingDamage(float damage)
     {
         if(IsInvincible) return;
+
+        healthSystem.CurrentHealthValue = -damage;
 
         StartCoroutine(OnTakingDamage());
     }

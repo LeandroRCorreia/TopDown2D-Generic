@@ -18,14 +18,12 @@ public class TriggerToMeleeAttack : BasePrimitiveAction
     public override void OnStart()
     {
         Assert.IsNotNull(weaponAttack);
-        Debug.Log("OnStart: Attacking melee");
 
     }
 
     public override TaskStatus OnUpdate()
     {
         TaskStatus currentTaskStatus = TaskStatus.RUNNING; 
-        Debug.Log("OnUpdate: Attacking melee");
 
         AiController.input = Vector3.zero;
         weaponAttack.OnAttackWeapon();

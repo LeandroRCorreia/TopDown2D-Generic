@@ -73,15 +73,15 @@ public class CharacterMovement2D : MonoBehaviour
 
     public void SetInput(Vector3 input)
     {
-        targetVelocity = input * speed * Time.deltaTime;
+        targetVelocity = input * speed;
     }
 
     public void UpdateMovement()
     {
-        Velocity = Vector3.MoveTowards(Velocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+        Velocity = Vector3.MoveTowards(Velocity, targetVelocity, acceleration * Time.deltaTime);
 
         var lastPosition = transform.position;
-        var targetPosition = lastPosition + Velocity * Time.fixedDeltaTime;
+        var targetPosition = lastPosition + Velocity * Time.deltaTime;
         transform.position = targetPosition;
     }
 

@@ -19,19 +19,52 @@ interface IPlayer : ICharacter
 [RequireComponent(typeof(CharacterFacing2D))]
 public class PlayerController : MonoBehaviour, IPlayer
 {
-    public CharacterMovement2D CharacterMovement {get; private set; }
-    public CharacterFacing2D CharacterFacing {get; private set;}
-    public IDamageable OnTakeDamage {get; private set;}
-    public IWeapon WeaponAttack {get; private set;}
 
     private PlayerInputActions playerInputActions;
 
+    private CharacterFacing2D _characterFacing;
+
+    private CharacterMovement2D _characterMovement;
+
+    public CharacterMovement2D CharacterMovement 
+    {
+        get
+        {
+            return _characterMovement ?? GetComponent<CharacterMovement2D>();
+        }
+        private set
+        {
+            _characterMovement = value;
+        } 
+    
+    }
+
+    public CharacterFacing2D CharacterFacing 
+    {
+        get
+        {
+            return _characterFacing ?? GetComponent<CharacterFacing2D>();
+        }
+        private set
+        {
+            _characterFacing = value;
+        }
+
+    }
+
+    public IDamageable OnTakeDamage {get; private set;}
+    public IWeapon WeaponAttack { get; private set; }
+
+    public HealthSystem healthSystem { get; private set; }
+
     private void Awake() 
     {
+        playerInputActions = new();
         CharacterMovement = GetComponent<CharacterMovement2D>();
         CharacterFacing = GetComponent<CharacterFacing2D>();
+
+        healthSystem = GetComponent<HealthSystem>();
         WeaponAttack = GetComponentInChildren<IWeapon>(true);
-        playerInputActions = new();
 
     }
 

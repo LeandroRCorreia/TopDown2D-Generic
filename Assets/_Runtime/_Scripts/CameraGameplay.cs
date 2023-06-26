@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+
+[ExecuteAlways]
 public class CameraGameplay : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
