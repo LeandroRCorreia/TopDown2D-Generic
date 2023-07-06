@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 [ExecuteAlways]
 public class CameraGameplay : MonoBehaviour
 {
@@ -67,7 +66,7 @@ public class CameraGameplay : MonoBehaviour
 
     private float WhenPlayerRunsSpeedPlayer()
     {
-        bool canApplyEffect = playerController.CharacterMovement.speedX > velocityPercentToApplyEffect;
+        bool canApplyEffect = playerController.CharacterMovement.currentPercentToReachMaxVelocity > velocityPercentToApplyEffect;
 
         var value = canApplyEffect ?
         Mathf.Lerp(currentSpeedPositionX, FinalRunPlayer, speedAceleration * Time.deltaTime) :

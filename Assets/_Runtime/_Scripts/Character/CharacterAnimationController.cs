@@ -4,7 +4,7 @@ public static class CharacterStringsConstrains
 {
     public static readonly string SpeedX = "SpeedX";
     public static readonly string SpeedY = "SpeedY";
-    public static readonly string IsOnAir = "IsOnAir";
+    public static readonly string IsOnGround = "IsOnGround";
 
 }
 
@@ -15,7 +15,7 @@ public class CharacterAnimationController : MonoBehaviour
     //IDLE AND RUN
     private int SpeedX => Animator.StringToHash(CharacterStringsConstrains.SpeedX);
     private int SpeedY => Animator.StringToHash(CharacterStringsConstrains.SpeedY);
-    private int IsOnAir => Animator.StringToHash(CharacterStringsConstrains.IsOnAir);
+    private int IsOnGround => Animator.StringToHash(CharacterStringsConstrains.IsOnGround);
 
     protected virtual void Awake() 
     {
@@ -30,9 +30,9 @@ public class CharacterAnimationController : MonoBehaviour
 
     protected virtual void MovementAnimator()
     {
-        animator.SetFloat(SpeedX, character.CharacterMovement.speedX);
+        animator.SetFloat(SpeedX, Mathf.Abs(character.CharacterMovement.VelocityX));
         animator.SetFloat(SpeedY, character.CharacterMovement.SpeedY);
-        animator.SetBool(IsOnAir, character.CharacterMovement.IsOnAir);
+        animator.SetBool(IsOnGround, character.CharacterMovement.IsOnGround);
     }
 
 }
