@@ -1,8 +1,11 @@
 
 public interface IDamageable
 {
-    public event System.Action OnTakeDamageEvent;
-    public bool IsInvincible {get;}
-    void TakingDamage(float damage);
+    CurrentStatus EntityStatus {get; }
+    
+    event System.Action<DamageInfo> OnTakeDamageEvent;
+    bool IsInvincible {get;}
+    void TakingDamage(in IssuerDamageInfo damageInfo);
+
 
 }

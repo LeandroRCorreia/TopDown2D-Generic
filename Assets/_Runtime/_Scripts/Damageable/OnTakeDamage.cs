@@ -1,36 +1,59 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+public struct DamageInfo
+{
+    public int Damage;
+    public bool IsCritical;
+}
 
 public class OnTakeDamage : MonoBehaviour, IDamageable
 {
-
-    private HealthSystem healthSystem;
+    private SpriteRenderer sprite;
 
     [Header("Invincible Params")]
     [Range(0.05f, 2f)] [SerializeField] private float timeInvincible = 0.1f;
     [Range(5, 20f)] [SerializeField] private float speedPingPongSprite = 10;
 
     private float currentTime = Mathf.NegativeInfinity;
-
-    private SpriteRenderer sprite;
-
+    public CurrentStatus EntityStatus {get;private set;}
     public bool IsInvincible {get; private set;}
-    public event System.Action OnTakeDamageEvent;
+
+    public event System.Action<DamageInfo> OnTakeDamageEvent;
 
     private void Awake() 
     {
         sprite = GetComponentInChildren<SpriteRenderer>();
-        healthSystem = GetComponent<HealthSystem>();
+        EntityStatus = GetComponent<CurrentStatus>();
     }
 
-    public void TakingDamage(float damage)
+    public void TakingDamage(in IssuerDamageInfo issuerDamageInfo)
     {
-        if(IsInvincible) return;
+        if (IsInvincible) return;
 
-        healthSystem.CurrentHealthValue = -damage;
+        DamageInfo damageInfo = ProcessTakingDamage(issuerDamageInfo);
+
+        OnTakeDamageEvent?.Invoke(damageInfo);
 
         StartCoroutine(OnTakingDamage());
+    }
+
+    private DamageInfo ProcessTakingDamage(in IssuerDamageInfo issuerDamageInfo)
+    {
+        DamageInfo damageInfo = new()
+        {
+            IsCritical = issuerDamageInfo.currentStatus.BaseStatus.CritChance >= Random.value,
+            Damage = issuerDamageInfo.currentStatus.BaseStatus.Strength
+        };
+
+        damageInfo.Damage = damageInfo.IsCritical ?
+        Mathf.RoundToInt(damageInfo.Damage * issuerDamageInfo.currentStatus.BaseStatus.DamamageMultiplier) :
+        damageInfo.Damage;
+
+        damageInfo.Damage = Mathf.RoundToInt(damageInfo.Damage - 
+        (damageInfo.Damage * EntityStatus.BaseStatus.PercentageMitigatedDefense));
+        
+        return damageInfo;
     }
 
     private IEnumerator OnTakingDamage()
@@ -69,7 +92,6 @@ public class OnTakeDamage : MonoBehaviour, IDamageable
     private void StartTakeDamageBehaviour()
     {
         IsInvincible = true;
-        OnTakeDamageEvent?.Invoke();
         currentTime = Time.time + timeInvincible;
     }
 

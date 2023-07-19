@@ -16,7 +16,7 @@ public abstract class HealthBarUI : MonoBehaviour
     [SerializeField][Range(0.25f, 2)] private float timeToApplySmoothness = 0.5f;
 
 
-    [SerializeField] protected float speedTargetHealthPercent = 2;
+    [SerializeField] protected float speedTargetHealthPercent = 4;
     private float percentHealthSmoothness = 1f;
 
 
@@ -58,7 +58,7 @@ public abstract class HealthBarUI : MonoBehaviour
         percentHealthSmoothness = sliderTakeDamageBar.fillAmount;
     }
 
-    private IEnumerator LessHealthBarCoro()
+    protected IEnumerator LessHealthBarCoro()
     {
         wasInLessHealth = true;
         yield return new WaitForSeconds(timeToApplySmoothness);
@@ -78,6 +78,11 @@ public abstract class HealthBarUI : MonoBehaviour
         percentHealthSmoothness = Mathf.MoveTowards(percentHealthSmoothness, healthSystem.HealthInPercent, speedTargetHealthPercent * Time.deltaTime);
 
         sliderTakeDamageBar.fillAmount = percentHealthSmoothness;
+    }
+
+    public void SetHealthBarActive(bool value)
+    {
+        gameObject.SetActive(value);
     }
 
     private void OnDestroy() 

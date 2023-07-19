@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -13,16 +12,13 @@ public static class MeleeAttackStringsConstants
 public class WeaponAttack : MonoBehaviour, IWeapon
 {
     [SerializeField] private CharacterFacing2D characterFacing;
-    private TriggerDamage triggerDamage;
-    private float lastAttackTime = 0;
     [field: SerializeField] public float AttackDuration {get; private set;} = 1f;
-    
     public bool IsAttacking {get; private set;} = false;
-
     [field: SerializeField] public float AttackCooldown {get; private set; } = 1.5f;
 
     private bool IsAttackReady => Time.time >= lastAttackTime + AttackCooldown;
-
+    private TriggerDamage triggerDamage;
+    private float lastAttackTime = 0;
     [SerializeField] private AnimationEventWeapon animationEventWeapon;
 
     private void Awake() 
@@ -44,6 +40,7 @@ public class WeaponAttack : MonoBehaviour, IWeapon
     public void OnAttackWeapon()
     {
         if(IsAttacking || !IsAttackReady) return;
+
 
         gameObject.SetActive(true);
         StartCoroutine(PerformWeaponAttack());

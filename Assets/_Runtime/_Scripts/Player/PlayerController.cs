@@ -8,6 +8,8 @@ interface ICharacter
     CharacterMovement2D CharacterMovement {get;}
     CharacterFacing2D CharacterFacing {get;}
 
+    HealthSystem HealthControl{get;}
+
 }
 
 interface IPlayer : ICharacter
@@ -55,7 +57,9 @@ public class PlayerController : MonoBehaviour, IPlayer
     public IDamageable OnTakeDamage {get; private set;}
     public IWeapon WeaponAttack { get; private set; }
 
-    public HealthSystem healthSystem { get; private set; }
+    public HealthSystem HealthControl { get; private set; }
+
+    private Vector3 playerInput;
 
     private void Awake() 
     {
@@ -63,7 +67,7 @@ public class PlayerController : MonoBehaviour, IPlayer
         CharacterMovement = GetComponent<CharacterMovement2D>();
         CharacterFacing = GetComponent<CharacterFacing2D>();
 
-        healthSystem = GetComponent<HealthSystem>();
+        HealthControl = GetComponent<HealthSystem>();
         WeaponAttack = GetComponentInChildren<IWeapon>(true);
 
     }
@@ -78,8 +82,8 @@ public class PlayerController : MonoBehaviour, IPlayer
 
     private void Update() 
     {
-        Vector2 playerInput = playerInputActions.Ground.Movement.ReadValue<Vector2>();
-        CharacterMovement.SetInput(playerInput);
+        playerInput = playerInputActions.Ground.Movement.ReadValue<Vector2>();
+
         if(!WeaponAttack.IsAttacking) 
             CharacterFacing.UpdateFacing(playerInput);
 
@@ -87,7 +91,7 @@ public class PlayerController : MonoBehaviour, IPlayer
 
     private void FixedUpdate() 
     {
-        CharacterMovement.UpdateMovement();
+        CharacterMovement.UpdateMovement(playerInput);
         
     }
 

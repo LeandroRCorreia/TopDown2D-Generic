@@ -11,7 +11,7 @@ public class HasPlatformInFront : MonoBehaviour
 
     [Header("HasPlatform")]
     [Range(0.25f, 2f)]
-    [SerializeField] private float platformRayDistanceFromPlayer = 0.5f;
+    [SerializeField] private float platformRayDistance = 0.5f;
 
     [Range(0.25f, 2f)]
     [SerializeField] private float platformRayLenght = 0.35f;
@@ -21,7 +21,7 @@ public class HasPlatformInFront : MonoBehaviour
 
     [Header("HasWallInFront")]
     [Range(0.25f, 2f)]
-    [SerializeField] private float wallRayDistanceFromPlayer = 0.5f;
+    [SerializeField] private float wallRayDistance = 0.5f;
 
     [Range(0.25f, 2f)]
     [SerializeField] private float wallRayLenght = 0.25f;
@@ -42,7 +42,7 @@ public class HasPlatformInFront : MonoBehaviour
         contactFilter.layerMask = whatIsPlatform;
 
         var upOffSet = (Vector3.up * wallRayOffsetY);
-        var dirCharacterOffset = (facing.GetCharacterFacingDirection() * wallRayDistanceFromPlayer);
+        var dirCharacterOffset = (facing.GetCharacterFacingDirection() * wallRayDistance);
         var pointRayCast = transform.position + upOffSet + dirCharacterOffset;
 
 
@@ -65,7 +65,7 @@ public class HasPlatformInFront : MonoBehaviour
         contactFilter.layerMask = whatIsPlatform;
 
         int hitCount = Physics2D.Raycast(
-        transform.position + (facing.GetCharacterFacingDirection() * wallRayDistanceFromPlayer),
+        transform.position + (facing.GetCharacterFacingDirection() * wallRayDistance),
         Vector2.down,
         contactFilter,
         platformColls,
@@ -95,7 +95,7 @@ public class HasPlatformInFront : MonoBehaviour
 
         var position = transform.position;
         var dirCharacter = facingParam.GetCharacterFacingDirection();
-        var pointLine = dirCharacter * platformRayDistanceFromPlayer;
+        var pointLine = dirCharacter * platformRayDistance;
 
         Gizmos.DrawRay(position + pointLine, Vector3.down * platformRayLenght);
     }
@@ -104,7 +104,7 @@ public class HasPlatformInFront : MonoBehaviour
     {
         var position = transform.position + (Vector3.up * wallRayOffsetY);
         var dirCharacter = facingParam.GetCharacterFacingDirection();
-        var pointLine = dirCharacter * wallRayDistanceFromPlayer;
+        var pointLine = dirCharacter * wallRayDistance;
 
         Gizmos.DrawRay(position + pointLine, facingParam.GetCharacterFacingDirection() * wallRayLenght);
     }

@@ -3,31 +3,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public interface IBoxInfo
+{
+
+    public Vector3 GetColliderUp {get;}
+    public Vector3 GetColliderBottom {get;}
+
+    public Vector3 GetColliderRight {get;}
+
+    public Vector3 GetColliderLeft {get;}
+
+}
+
+
+[ExecuteAlways]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class CharacterMovement2D : MonoBehaviour
+public class CharacterMovement2D : MonoBehaviour, IBoxInfo
 {
     private CharacterFacing2D characterFacing;
     private Rigidbody2D rb;
 
     [Header("Movement")]
-    [SerializeField] private float speed = 20f;
+    [SerializeField] private float maxSpeed = 10;
     [SerializeField] private float acceleration = 70f;
     private Vector3 velocity;
     private Vector3 targetVelocity;
-    public float currentPercentToReachMaxVelocity => Mathf.Abs(VelocityX) / speed;
+    public float CurrentPercentToReachMaxVelocity => Mathf.Abs(VelocityX) / maxSpeed;
     public float VelocityX => velocity.x;
 
     //ColliderInfo
-    private BoxCollider2D boxCollider;
-    public Vector3 ColliderSize => boxCollider.size;
+    private Collider2D boxCollider;
     public Vector3 ColliderCenter => boxCollider.bounds.center;
     public Vector3 ColliderExtents => boxCollider.bounds.extents;
-    public Vector3 ColliderOffset => boxCollider.offset * (Vector3.down * 0.5f);
 
     private Vector3[] colliderLocalPointsRight;
     private Vector3[] colliderLocalPointsLeft;
     private Vector3[] colLocalPointsBottom;
+
+    public Vector3 GetColliderUp => ColliderCenter + Vector3.up * ColliderExtents.y;
+
+    public Vector3 GetColliderBottom =>  ColliderCenter + Vector3.down * ColliderExtents.y;
+
+    public Vector3 GetColliderRight => ColliderCenter + Vector3.right * ColliderExtents.x;
+
+    public Vector3 GetColliderLeft => ColliderCenter + Vector3.left * ColliderExtents.x;
+
     //
 
     [Header("Jump")]
@@ -57,9 +79,9 @@ public class CharacterMovement2D : MonoBehaviour
 
     private void StartBoxColliderInfo()
     {
-        boxCollider.offset = Vector3.up * boxCollider.size.y * 0.5f;
+        // boxCollider.offset = Vector3.up * boxCollider.size.y * 0.5f;
 
-        Vector3 getColliderRightLocalPosition = GetColliderRight() - transform.position;
+        Vector3 getColliderRightLocalPosition = GetColliderRight - transform.position;
         colliderLocalPointsRight = new Vector3[]
         {
             getColliderRightLocalPosition + Vector3.up * ColliderExtents.y,
@@ -67,7 +89,7 @@ public class CharacterMovement2D : MonoBehaviour
             getColliderRightLocalPosition + Vector3.down * ColliderExtents.y,
         };
 
-        Vector3 getColliderLeftLocalPosition = GetColliderLeft() - transform.position;
+        Vector3 getColliderLeftLocalPosition = GetColliderLeft - transform.position;
         colliderLocalPointsLeft = new Vector3[]
         {
             getColliderLeftLocalPosition + Vector3.up * ColliderExtents.y,
@@ -75,7 +97,7 @@ public class CharacterMovement2D : MonoBehaviour
             getColliderLeftLocalPosition + Vector3.down * ColliderExtents.y,
         };
 
-        Vector3 getColliderBottomLocalPosition = GetColliderBottom() - transform.position;
+        Vector3 getColliderBottomLocalPosition = GetColliderBottom - transform.position;
         colLocalPointsBottom = new Vector3[]
         {
             getColliderBottomLocalPosition + (Vector3.right * ColliderExtents.x),
@@ -90,20 +112,30 @@ public class CharacterMovement2D : MonoBehaviour
     {
         UpdateGroundCheck();
 
-    }    
+    }  
 
-    public void Movement(Vector3 input)
+    public void UpdateMovement(Vector3 input)
     {
         SetInput(input);
-        UpdateMovement();
+        Movement();
     }
 
-    public void SetInput(Vector3 input)
+    public void Jump()
     {
-        targetVelocity = input * speed;
+        if(IsOnGround)
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            
+        }
+
+    }
+
+    private void SetInput(Vector3 input)
+    {
+        targetVelocity = input * maxSpeed;
     }
     
-    public void UpdateMovement()
+    private void Movement()
     {
         velocity = Vector3.MoveTowards(velocity, targetVelocity, acceleration * Time.fixedDeltaTime);
         UpdateCollisionHorizontal();
@@ -117,7 +149,7 @@ public class CharacterMovement2D : MonoBehaviour
 
     private void UpdateCollisionHorizontal()
     {
-        var rayLenght = speed * Time.fixedDeltaTime;
+        var rayLenght = maxSpeed * Time.fixedDeltaTime;
         var rayDir = characterFacing.IsFacingRight ? Vector3.right : Vector3.left;
 
         Vector3[] colliderDirPoint = characterFacing.IsFacingRight ?
@@ -162,35 +194,6 @@ public class CharacterMovement2D : MonoBehaviour
         }
 
         IsOnGround = hitCount > 0;
-    }
-    
-    #region ColliderInfo
-
-    private Vector3 GetColliderBottom()
-    {
-        return ColliderCenter + Vector3.down * ColliderExtents.y;
-    }
-
-    private Vector3 GetColliderRight()
-    {
-        return ColliderCenter + Vector3.right * ColliderExtents.x;
-    }
-
-    private Vector3 GetColliderLeft()
-    {
-        return ColliderCenter + Vector3.left * ColliderExtents.x;
-    }
-
-    #endregion
-
-    public void Jump()
-    {
-        if(IsOnGround)
-        {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            
-        }
-
     }
 
 }

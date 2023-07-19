@@ -20,13 +20,11 @@ public class ChaseTarget : GOAction
     public override void OnStart()
     {
         base.OnStart();
-        Debug.Log("OnStart: ChaseTarget");
 
     }
 
     public override TaskStatus OnUpdate()
     {
-        Debug.Log("OnUpdate: ChaseTarget");
         var toTargetX = Mathf.Sign((target.position.x - gameObject.transform.position.x));
         enemyIAController.input = new Vector3(toTargetX, 0, 0);
 
