@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(IDamageable))]
-[RequireComponent(typeof(IBoxInfo))]
+[RequireComponent(typeof(IColliderInfo))]
 public class FloatingDamageSpawner : MonoBehaviour
 {
     
@@ -12,12 +12,12 @@ public class FloatingDamageSpawner : MonoBehaviour
     [SerializeField] private FloatingDamage floatingDamageCritical;
     private IDamageable damageable;
 
-    private IBoxInfo boxInfo;
+    private IColliderInfo boxInfo;
 
     private void Awake() 
     {
         damageable = GetComponent<IDamageable>();
-        boxInfo = GetComponent<IBoxInfo>();
+        boxInfo = GetComponent<IColliderInfo>();
     }
 
     private void Start() 

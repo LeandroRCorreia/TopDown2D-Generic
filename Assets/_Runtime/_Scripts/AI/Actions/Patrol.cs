@@ -27,9 +27,9 @@ public class Patrol : BasePrimitiveAction
     {
         if(!hasPlatformInFront.HasPlatformFront() || hasPlatformInFront.HasWallInFront())
         {
-            input = input * -1;
+            input *= -1;
         }
-        enemyIAController.input =  input;
+        enemyIAController.input = input;
 
         return TaskStatus.RUNNING;
     }
@@ -42,32 +42,6 @@ public class Patrol : BasePrimitiveAction
     public override void OnAbort()
     {
         base.OnAbort();
-    }
-    
-    private IEnumerator PerformPatrol()
-    {
-        var durationPatrol = 2f;
-        var durationIdle = 1f;
-
-        while(true)
-        {
-            yield return MovementBy(Vector3.right, durationPatrol);
-            yield return MovementBy(Vector3.zero, durationIdle);
-            yield return MovementBy(Vector3.left, durationPatrol);
-            yield return MovementBy(Vector3.zero, durationIdle);
-        }
-
-    }
-
-    private IEnumerator MovementBy(Vector3 input, float durationMovement)
-    {
-        var finalTime = Time.time + durationMovement;
-        while(Time.time < finalTime)
-        {   
-            enemyIAController.input = input;
-            yield return null;
-        }
-
     }
 
 }

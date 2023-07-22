@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282808273eaff7340af08a07231d8361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 8
   acceleration: 60
   jumpForce: 7
   whatIsGround:
@@ -201,7 +201,7 @@ MonoBehaviour:
     boolParamsNames: []
     boolParamsLostDefaultValue: 
     floatParams:
-    - 2.75
+    - 0.75
     floatParamsNames:
     - DistanceToConsiderCloseEnough
     floatParamsLostDefaultValue: 
@@ -299,11 +299,8 @@ MonoBehaviour:
   whatIsPlatform:
     serializedVersion: 2
     m_Bits: 64
-  platformRayDistance: 0.5
-  platformRayLenght: 0.35
-  wallRayDistance: 0.5
-  wallRayLenght: 0.35
-  wallRayOffsetY: 0.375
+  platformRayDistance: 0.75
+  platformRayLenght: 0.53
 --- !u!114 &5282985574692701947
 MonoBehaviour:
   m_ObjectHideFlags: 0

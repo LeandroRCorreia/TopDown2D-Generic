@@ -1,77 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterFacing2D))]
+[RequireComponent(typeof(CharacterMovement2D))]
 public class HasPlatformInFront : MonoBehaviour
 {
 
-    private CharacterFacing2D facing;
+    private CharacterFacing2D charFacing;
+    private CharacterMovement2D charMovement;
+    private IColliderInfo collInfo;
     [SerializeField] LayerMask whatIsPlatform;
 
     [Header("HasPlatform")]
-    [Range(0.25f, 2f)]
-    [SerializeField] private float platformRayDistance = 0.5f;
+    [Range(0.25f, 5f)]
+    [SerializeField] private float rayDistanceFromCollider = 1.25f;
 
     [Range(0.25f, 2f)]
-    [SerializeField] private float platformRayLenght = 0.35f;
-    private RaycastHit2D[] platformColls = new RaycastHit2D[5]; 
-
-    [Space]
-
-    [Header("HasWallInFront")]
-    [Range(0.25f, 2f)]
-    [SerializeField] private float wallRayDistance = 0.5f;
-
-    [Range(0.25f, 2f)]
-    [SerializeField] private float wallRayLenght = 0.25f;
-    [Range(0.05f, 2f)]
-    [SerializeField] private float wallRayOffsetY = 0.25f;
-
-    private RaycastHit2D[] wallColls = new RaycastHit2D[5]; 
+    [SerializeField] private float rayLenght = 0.35f;
 
     private void Awake() 
     {
-        facing = GetComponent<CharacterFacing2D>();   
+        charFacing = GetComponent<CharacterFacing2D>();   
+        charMovement = GetComponent<CharacterMovement2D>();
+        collInfo = GetComponent<IColliderInfo>();
     }
 
     public bool HasWallInFront()
     {
-        ContactFilter2D contactFilter = new ContactFilter2D();
-        contactFilter.useLayerMask = true;
-        contactFilter.layerMask = whatIsPlatform;
-
-        var upOffSet = (Vector3.up * wallRayOffsetY);
-        var dirCharacterOffset = (facing.GetCharacterFacingDirection() * wallRayDistance);
-        var pointRayCast = transform.position + upOffSet + dirCharacterOffset;
-
-
-        int hitCount = Physics2D.Raycast(
-        pointRayCast,
-        facing.GetCharacterFacingDirection(),
-        contactFilter,
-        wallColls,
-        wallRayLenght);
-        
-
-        return hitCount > 0;
+        return charMovement.IsTouchingWall;
     }
 
     public bool HasPlatformFront()
     {
-        //Valid only if obj is OnGround;
-        ContactFilter2D contactFilter = new ContactFilter2D();
-        contactFilter.useLayerMask = true;
-        contactFilter.layerMask = whatIsPlatform;
 
-        int hitCount = Physics2D.Raycast(
-        transform.position + (facing.GetCharacterFacingDirection() * wallRayDistance),
-        Vector2.down,
-        contactFilter,
-        platformColls,
-        platformRayLenght);
+        var isPlatformInFront = Physics2D.Raycast
+        (
+            collInfo.GetColliderBottom + (charFacing.GetCharacterFacingDirection() * rayDistanceFromCollider),
+            Vector2.down,
+            rayLenght,
+            whatIsPlatform
+        );
 
-        return hitCount > 0;
+
+        return isPlatformInFront;
     }
 
     private void OnDrawGizmos()
@@ -82,31 +52,18 @@ public class HasPlatformInFront : MonoBehaviour
 
     private void UpdateDraw()
     {
-        if (facing == null)
-        {
-            facing = GetComponent<CharacterFacing2D>();
-        }
-        DrawPlatformRay(facing);
-        DrawWallRay(facing);
+        charFacing ??= GetComponent<CharacterFacing2D>();
+        collInfo ??= GetComponent<IColliderInfo>();
+        DrawPlatformRay(charFacing, collInfo);
     }
 
-    private void DrawPlatformRay(CharacterFacing2D facingParam)
+    private void DrawPlatformRay(CharacterFacing2D facingParam, IColliderInfo collInfo)
     {
-
-        var position = transform.position;
         var dirCharacter = facingParam.GetCharacterFacingDirection();
-        var pointLine = dirCharacter * platformRayDistance;
+        var originRayCast = collInfo.GetColliderBottom + dirCharacter * rayDistanceFromCollider;
 
-        Gizmos.DrawRay(position + pointLine, Vector3.down * platformRayLenght);
-    }
 
-    private void DrawWallRay(CharacterFacing2D facingParam)
-    {
-        var position = transform.position + (Vector3.up * wallRayOffsetY);
-        var dirCharacter = facingParam.GetCharacterFacingDirection();
-        var pointLine = dirCharacter * wallRayDistance;
-
-        Gizmos.DrawRay(position + pointLine, facingParam.GetCharacterFacingDirection() * wallRayLenght);
+        Gizmos.DrawRay(originRayCast, Vector3.down * rayLenght);
     }
 
 }

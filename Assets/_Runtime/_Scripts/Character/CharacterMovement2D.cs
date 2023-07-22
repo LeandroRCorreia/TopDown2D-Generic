@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public interface IBoxInfo
+public interface IColliderInfo
 {
 
     public Vector3 GetColliderUp {get;}
@@ -20,13 +20,13 @@ public interface IBoxInfo
 [ExecuteAlways]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
-public class CharacterMovement2D : MonoBehaviour, IBoxInfo
+public class CharacterMovement2D : MonoBehaviour, IColliderInfo
 {
     private CharacterFacing2D characterFacing;
     private Rigidbody2D rb;
 
     [Header("Movement")]
-    [SerializeField] private float maxSpeed = 10;
+    [SerializeField] private float maxSpeed = 7;
     [SerializeField] private float acceleration = 70f;
     private Vector3 velocity;
     private Vector3 targetVelocity;
@@ -34,9 +34,9 @@ public class CharacterMovement2D : MonoBehaviour, IBoxInfo
     public float VelocityX => velocity.x;
 
     //ColliderInfo
-    private Collider2D boxCollider;
-    public Vector3 ColliderCenter => boxCollider.bounds.center;
-    public Vector3 ColliderExtents => boxCollider.bounds.extents;
+    private Collider2D currentCollider;
+    public Vector3 ColliderCenter => currentCollider.bounds.center;
+    public Vector3 ColliderExtents => currentCollider.bounds.extents;
 
     private Vector3[] colliderLocalPointsRight;
     private Vector3[] colliderLocalPointsLeft;
@@ -66,7 +66,7 @@ public class CharacterMovement2D : MonoBehaviour, IBoxInfo
     private void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        currentCollider = GetComponent<BoxCollider2D>();
         characterFacing = GetComponent<CharacterFacing2D>();
     }
 
@@ -79,8 +79,6 @@ public class CharacterMovement2D : MonoBehaviour, IBoxInfo
 
     private void StartBoxColliderInfo()
     {
-        // boxCollider.offset = Vector3.up * boxCollider.size.y * 0.5f;
-
         Vector3 getColliderRightLocalPosition = GetColliderRight - transform.position;
         colliderLocalPointsRight = new Vector3[]
         {
@@ -104,7 +102,6 @@ public class CharacterMovement2D : MonoBehaviour, IBoxInfo
             getColliderBottomLocalPosition,
             getColliderBottomLocalPosition + (Vector3.left * ColliderExtents.x)
         };
-
 
     }
 
@@ -149,6 +146,12 @@ public class CharacterMovement2D : MonoBehaviour, IBoxInfo
 
     private void UpdateCollisionHorizontal()
     {
+        WallCheck();
+
+    }
+
+    private void WallCheck()
+    {
         var rayLenght = maxSpeed * Time.fixedDeltaTime;
         var rayDir = characterFacing.IsFacingRight ? Vector3.right : Vector3.left;
 
@@ -162,17 +165,16 @@ public class CharacterMovement2D : MonoBehaviour, IBoxInfo
         {
             var rayOrigin = transform.position + localPoint;
 
-            if(Physics2D.Raycast(rayOrigin, rayDir, rayLenght, whatIsGround))
+            if (Physics2D.Raycast(rayOrigin, rayDir, rayLenght, whatIsGround))
             {
                 Debug.DrawRay(rayOrigin, rayDir * rayLenght, Color.green);
                 ++hitCount;
                 velocity = new Vector3(0, velocity.y, velocity.z);
-                continue;      
+                continue;
             }
             Debug.DrawRay(rayOrigin, rayDir * rayLenght, Color.red);
         }
         IsTouchingWall = hitCount > 1;
-
     }
 
     private void UpdateGroundCheck()
