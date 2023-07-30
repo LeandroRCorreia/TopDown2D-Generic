@@ -52,7 +52,7 @@ public class CharacterAnimationController : MonoBehaviour
     {
         animator.SetFloat(SpeedX, Mathf.Abs(character.CharacterMovement.VelocityX));
         animator.SetFloat(SpeedY, character.CharacterMovement.SpeedY);
-        animator.SetBool(IsOnGround, character.CharacterMovement.IsOnGround);
+        animator.SetBool(IsOnGround, character.CheckSurrounds.IsTouchingBottom);
     }
 
 }

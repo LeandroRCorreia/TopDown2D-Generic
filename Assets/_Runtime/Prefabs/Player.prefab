@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 8890509996619491174}
   - component: {fileID: 8323805833924659014}
   - component: {fileID: 4385433833633048398}
+  - component: {fileID: 2328178647150733877}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -353,13 +354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282808273eaff7340af08a07231d8361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  acceleration: 60
+  movementParams: {fileID: 11400000, guid: 0e4fac0f8b96df242b582f7a9dc639f9, type: 2}
   jumpForce: 7.5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  groundCheckRayCastLenght: 0.1
 --- !u!114 &3394033351764505703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +421,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStatus: {fileID: 11400000, guid: 0a550e01e3bf80349831dd38ec4c60a7, type: 2}
+--- !u!114 &2328178647150733877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684483801090416681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5234ba972f20dfc4daf9e6e0a179c828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  raysLength: 0.15
 --- !u!1001 &7757428237645985160
 PrefabInstance:
   m_ObjectHideFlags: 0

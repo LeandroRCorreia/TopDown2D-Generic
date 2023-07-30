@@ -22,7 +22,7 @@ public class IsTargetVisible : ConditionBase
     private Vector3 TargetPosition => target.position;
     private Vector3 MuzzlePosition => muzzle.position;
 
-    private float timeAtlastFrameInField = -Mathf.Infinity;
+    private float timeAtlastFrameInField = Mathf.NegativeInfinity;
 
     public override bool Check()
     {

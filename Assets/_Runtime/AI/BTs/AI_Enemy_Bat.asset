@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a7c8ca992f915438a96c2077353778, type: 3}
+  m_Name: AI_Enemy_Bat
+  m_EditorClassIdentifier: 
+  brickName: Assets/_Runtime/AI/BTs/AI_Enemy_Bat.asset
+  xml: "\uFEFF<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<BehaviorBricks xmlns:ref=\"urn:padaone\"
+    version=\"1.0\">\r\n  <BehaviorTree id=\"0\" />\r\n  <runtimeInfo>\r\n    <BehaviorTree
+    id=\"0\" guid=\"7f3f77b7867002d4786903318e5cce3c\" nextId=\"17\">\r\n      <root>\r\n       
+    <RepeatDecorator id=\"1\" />\r\n      </root>\r\n      <inputParams>\r\n       
+    <inputValues>\r\n          <entry name=\"CheckSurrounds\" type=\"CheckSurrounds\"
+    isBlackboard=\"False\" />\r\n          <entry name=\"AiController\" type=\"EnemyIAController\"
+    isBlackboard=\"False\" />\r\n          <entry name=\"IsHorizontal\" type=\"System.Boolean\"
+    isBlackboard=\"False\" value=\"False\" />\r\n        </inputValues>\r\n     
+    </inputParams>\r\n      <outputParams />\r\n      <localParams />\r\n    </BehaviorTree>\r\n   
+    <RepeatDecorator id=\"1\" loops=\"-1\" policy=\"ContinueWhenChildFails\">\r\n     
+    <child>\r\n        <PrioritySelectorNode id=\"13\" />\r\n      </child>\r\n     
+    <inputParams />\r\n      <outputParams />\r\n      <localParams />\r\n    </RepeatDecorator>\r\n   
+    <PrioritySelectorNode id=\"13\">\r\n      <children>\r\n        <elem>\r\n         
+    <GuardAndNode>\r\n            <guard>\r\n              <ConditionEvalNode id=\"14\"
+    />\r\n            </guard>\r\n            <child>\r\n              <ActionNode
+    id=\"8\" />\r\n            </child>\r\n          </GuardAndNode>\r\n        </elem>\r\n     
+    </children>\r\n      <inputParams />\r\n      <outputParams />\r\n      <localParams
+    />\r\n    </PrioritySelectorNode>\r\n    <ConditionEvalNode id=\"14\" policy=\"WAIT_UNTIL_FALSE_AND_FAIL\"
+    name=\"AlwaysTrue\">\r\n      <inputParams />\r\n      <outputParams />\r\n     
+    <localParams />\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"8\" action=\"Game/PatrolOnAir\">\r\n     
+    <inputParams>\r\n        <inputValues>\r\n          <entry name=\"AiController\"
+    type=\"EnemyIAController\" isBlackboard=\"True\" blackboard=\"AiController\"
+    />\r\n          <entry name=\"CheckSurrounds\" type=\"CheckSurrounds\" isBlackboard=\"True\"
+    blackboard=\"CheckSurrounds\" />\r\n          <entry name=\"PatrolType\" type=\"System.Boolean\"
+    isBlackboard=\"True\" blackboard=\"IsHorizontal\" />\r\n          <entry name=\"PatrolDirection\"
+    type=\"System.Boolean\" isBlackboard=\"True\" blackboard=\"IsHorizontal\" />\r\n       
+    </inputValues>\r\n      </inputParams>\r\n      <outputParams />\r\n      <localParams
+    />\r\n    </ActionNode>\r\n  </runtimeInfo>\r\n  <editorInfo>\r\n    <BehaviorTree
+    id=\"0\" _name=\"AI_Enemy_Bat\" _description=\"\" _removeIfClosed=\"False\">\r\n     
+    <_rootList>\r\n        <elem>\r\n          <RepeatDecorator id=\"1\" />\r\n       
+    </elem>\r\n        <elem>\r\n          <ActionNode id=\"8\" />\r\n        </elem>\r\n       
+    <elem>\r\n          <PrioritySelectorNode id=\"13\" />\r\n        </elem>\r\n       
+    <elem>\r\n          <ConditionEvalNode id=\"14\" />\r\n        </elem>\r\n     
+    </_rootList>\r\n      <_nodes>\r\n        <nodes>\r\n          <RepeatDecorator
+    id=\"1\" />\r\n          <ActionNode id=\"8\" />\r\n          <PrioritySelectorNode
+    id=\"13\" />\r\n          <ConditionEvalNode id=\"14\" />\r\n        </nodes>\r\n     
+    </_nodes>\r\n    </BehaviorTree>\r\n    <RepeatDecorator id=\"1\">\r\n      <_data>\r\n       
+    <data breakpoint=\"0\" selected=\"False\" position=\"673.075 56.80002\" name=\"Repeat\"
+    description=\"Repeats the execution of its child node\" cardinality=\"1\" hasParent=\"False\">\r\n         
+    <BehaviorTree id=\"0\" />\r\n          <RepeatDecorator id=\"1\" />\r\n       
+    </data>\r\n      </_data>\r\n    </RepeatDecorator>\r\n    <PrioritySelectorNode
+    id=\"13\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
+    position=\"604.4 187.6\" name=\"Priority Selector\" description=\"\" cardinality=\"1\"
+    hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <PrioritySelectorNode
+    id=\"13\" />\r\n          <RepeatDecorator id=\"1\" />\r\n        </data>\r\n     
+    </_data>\r\n    </PrioritySelectorNode>\r\n    <ConditionEvalNode id=\"14\">\r\n     
+    <_data>\r\n        <data breakpoint=\"0\" selected=\"False\" position=\"879.15
+    947.0999\" name=\"AlwaysTrue\" description=\"Eval\" cardinality=\"1\" hasParent=\"True\">\r\n         
+    <BehaviorTree id=\"0\" />\r\n          <ConditionEvalNode id=\"14\" />\r\n         
+    <PrioritySelectorNode id=\"13\" />\r\n        </data>\r\n      </_data>\r\n   
+    </ConditionEvalNode>\r\n    <ActionNode id=\"8\">\r\n      <_data>\r\n       
+    <data breakpoint=\"0\" selected=\"True\" position=\"480.5751 406.55\" name=\"Game/PatrolOnAir\"
+    description=\"\" cardinality=\"0\" hasParent=\"False\">\r\n          <BehaviorTree
+    id=\"8\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n  </editorInfo>\r\n 
+    <runtimeInfo>\r\n    <BehaviorTree id=\"8\" nextId=\"1\">\r\n      <inputParams
+    />\r\n      <outputParams />\r\n      <localParams />\r\n    </BehaviorTree>\r\n 
+    </runtimeInfo>\r\n  <editorInfo>\r\n    <BehaviorTree id=\"8\" _removeIfClosed=\"False\">\r\n     
+    <_rootList />\r\n      <_nodes>\r\n        <nodes />\r\n      </_nodes>\r\n   
+    </BehaviorTree>\r\n  </editorInfo>\r\n</BehaviorBricks>"
+  zoom: 0.5
+  subslist: []
+  _guid: 7f3f77b7867002d4786903318e5cce3c

@@ -6,8 +6,10 @@ public class EnemyIAController : MonoBehaviour, ICharacter
 {
     public CharacterFacing2D CharacterFacing {get; private set;}
     public CharacterMovement2D CharacterMovement {get; private set;}
-
+    public CheckSurrounds CheckSurrounds {get; private set;}
     public OnTakeDamage OnTakingDamage {get; private set;}
+
+    [Range(0.01f, 3f)] [SerializeField] private float tempTimeToDisable = 3;
 
     public Vector3 input {get; set; }
 
@@ -20,6 +22,7 @@ public class EnemyIAController : MonoBehaviour, ICharacter
         CharacterMovement = GetComponent<CharacterMovement2D>();
         CharacterFacing = GetComponent<CharacterFacing2D>();
         OnTakingDamage = GetComponent<OnTakeDamage>();
+        CheckSurrounds = GetComponent<CheckSurrounds>();
         behaviorExecutor = GetComponent<BehaviorExecutor>();
         HealthControl = GetComponent<HealthSystem>();
     }
@@ -43,7 +46,6 @@ public class EnemyIAController : MonoBehaviour, ICharacter
 
     private IEnumerator TEMPDisableInCertainTimeGm()
     {
-        float tempTimeToDisable = 3;
         float finaltime = Time.time + tempTimeToDisable;
 
         while(Time.time < finaltime)

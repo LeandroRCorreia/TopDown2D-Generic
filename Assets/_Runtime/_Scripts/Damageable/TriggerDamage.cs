@@ -13,7 +13,7 @@ public struct IssuerDamageInfo
 public class TriggerDamage : MonoBehaviour
 {
 
-    //TODO: inappropriate pointer encapsulation 
+    //TODO: inappropriate pointer encapsulation
     [field: SerializeField] public CurrentStatus currentStatus {get; private set;}
     //
 

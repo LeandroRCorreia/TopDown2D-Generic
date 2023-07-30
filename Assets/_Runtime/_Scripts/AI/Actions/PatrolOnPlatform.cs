@@ -4,8 +4,8 @@ using Pada1.BBCore.Framework;
 using Pada1.BBCore.Tasks;
 using UnityEngine;
 
-[Action("Game/Patrol")]
-public class Patrol : BasePrimitiveAction
+[Action("Game/PatrolOnPlatform")]
+public class PatrolOnPlatform : BasePrimitiveAction
 {
 
     [InParam("AiController")]
@@ -19,29 +19,27 @@ public class Patrol : BasePrimitiveAction
     public override void OnStart()
     {
         base.OnStart();
-        input = Vector3.right;
+        input =  Random.value > 0.5f ? Vector3.right : Vector3.left;
+
 
     }
 
     public override TaskStatus OnUpdate()
     {
-        if(!hasPlatformInFront.HasPlatformFront() || hasPlatformInFront.HasWallInFront())
-        {
-            input *= -1;
-        }
+        CheckInvertInput();
+
         enemyIAController.input = input;
 
         return TaskStatus.RUNNING;
     }
 
-    public override void OnEnd()
+    private void CheckInvertInput()
     {
-        base.OnEnd();
+        if (!hasPlatformInFront.HasPlatformFront() || hasPlatformInFront.HasWallInFront())
+        {
+            input *= -1;
+        }
     }
 
-    public override void OnAbort()
-    {
-        base.OnAbort();
-    }
 
 }

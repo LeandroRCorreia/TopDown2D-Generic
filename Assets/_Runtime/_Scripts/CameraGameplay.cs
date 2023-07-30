@@ -66,7 +66,7 @@ public class CameraGameplay : MonoBehaviour
 
     private float WhenPlayerRunsSpeedPlayer()
     {
-        bool canApplyEffect = playerController.CharacterMovement.CurrentPercentToReachMaxVelocity > velocityPercentToApplyEffect;
+        bool canApplyEffect = playerController.CharacterMovement.PercentToReachMaxVelocity > velocityPercentToApplyEffect;
 
         var value = canApplyEffect ?
         Mathf.Lerp(currentSpeedPositionX, FinalRunPlayer, speedAceleration * Time.deltaTime) :

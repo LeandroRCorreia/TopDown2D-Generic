@@ -298,7 +298,7 @@ RectTransform:
   - {fileID: 4719457491661745469}
   - {fileID: 6744987577914555740}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -392,9 +392,8 @@ GameObject:
   - component: {fileID: 8858858956991338826}
   - component: {fileID: 8602139333079770553}
   - component: {fileID: 4991419232793976691}
-  - component: {fileID: 5129019954905942600}
   m_Layer: 5
-  m_Name: AttackButton
+  m_Name: AttackIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,24 +457,12 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5129019954905942600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8187287838308197926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ControlPath: <Keyboard>/k
 --- !u!1001 &2507374728259775818
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 7778336684153372573}
     m_Modifications:
     - target: {fileID: -5849814575657044198, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
@@ -571,6 +558,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9174112201847590934, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2124178327010925025}
+    - targetCorrespondingSourceObject: {fileID: 9174112201847590934, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4014048112427036615}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
 --- !u!224 &6744987577914555740 stripped
 RectTransform:
@@ -582,6 +578,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 4819484827100330447}
     m_Modifications:
     - target: {fileID: -5849814575657044198, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
@@ -677,6 +674,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9174112201847590934, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5785945335401206934}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
 --- !u!224 &4757660163228477271 stripped
 RectTransform:
@@ -688,8 +691,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 7778336684153372573}
     m_Modifications:
+    - target: {fileID: -5849814575657044198, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
+      propertyPath: m_ControlPath
+      value: <Keyboard>/k
+      objectReference: {fileID: 0}
     - target: {fileID: 6475959892454357495, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
       propertyPath: m_Name
       value: AttackButton
@@ -779,6 +787,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9174112201847590934, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8858858956991338826}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
 --- !u!224 &4719457491661745469 stripped
 RectTransform:
@@ -790,6 +804,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 4819484827100330447}
     m_Modifications:
     - target: {fileID: -5849814575657044198, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
@@ -885,6 +900,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 9174112201847590934, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8984015766208679388}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c0b5d4fa61eddd4eb12f13a0396c704, type: 3}
 --- !u!224 &816336439839770725 stripped
 RectTransform:

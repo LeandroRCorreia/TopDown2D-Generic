@@ -25,8 +25,11 @@ public class ChaseTarget : GOAction
 
     public override TaskStatus OnUpdate()
     {
-        var toTargetX = Mathf.Sign((target.position.x - gameObject.transform.position.x));
+        var toTargetX = Mathf.Sign(target.position.x - gameObject.transform.position.x);
         enemyIAController.input = new Vector3(toTargetX, 0, 0);
+
+
+
 
         return TaskStatus.RUNNING;
     }

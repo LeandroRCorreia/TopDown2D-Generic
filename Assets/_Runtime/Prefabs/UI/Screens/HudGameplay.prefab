@@ -66,10 +66,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 832414067125386415}
+  - {fileID: 4271061536109997087}
   - {fileID: 7061625664011810972}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -89,13 +89,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  sliderHealth: {fileID: 2815803117430724805}
-  speedTargetHealthPercent: 1
---- !u!1001 &6953382107671561010
+--- !u!1001 &5816381147045843842
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6953382108314828965}
     m_Modifications:
     - target: {fileID: 7228937622901602746, guid: 9d8fd2a58563af44892dc3f6305a66f9, type: 3}
@@ -187,19 +186,27 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d8fd2a58563af44892dc3f6305a66f9, type: 3}
---- !u!224 &832414067125386415 stripped
+--- !u!224 &4271061536109997087 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7778336684153372573, guid: 9d8fd2a58563af44892dc3f6305a66f9, type: 3}
-  m_PrefabInstance: {fileID: 6953382107671561010}
+  m_PrefabInstance: {fileID: 5816381147045843842}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7717919539429869161
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 7061625664011810972}
     m_Modifications:
+    - target: {fileID: 632181839615967852, guid: 89523627a5d56df4cae4be6ae4372ca4, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2782046498231364061, guid: 89523627a5d56df4cae4be6ae4372ca4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -297,18 +304,10 @@ PrefabInstance:
       value: HealthBarPlayerHUD
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89523627a5d56df4cae4be6ae4372ca4, type: 3}
---- !u!114 &2815803117430724805 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5478682729134874284, guid: 89523627a5d56df4cae4be6ae4372ca4, type: 3}
-  m_PrefabInstance: {fileID: 7717919539429869161}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &5584567316486598580 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2782046498231364061, guid: 89523627a5d56df4cae4be6ae4372ca4, type: 3}

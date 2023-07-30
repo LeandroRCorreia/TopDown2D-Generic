@@ -1,12 +1,12 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterFacing2D))]
-[RequireComponent(typeof(CharacterMovement2D))]
+[RequireComponent(typeof(CheckSurrounds))]
 public class HasPlatformInFront : MonoBehaviour
 {
 
     private CharacterFacing2D charFacing;
-    private CharacterMovement2D charMovement;
+    private CheckSurrounds checkSurrounds;
     private IColliderInfo collInfo;
     [SerializeField] LayerMask whatIsPlatform;
 
@@ -20,13 +20,13 @@ public class HasPlatformInFront : MonoBehaviour
     private void Awake() 
     {
         charFacing = GetComponent<CharacterFacing2D>();   
-        charMovement = GetComponent<CharacterMovement2D>();
+        checkSurrounds = GetComponent<CheckSurrounds>();
         collInfo = GetComponent<IColliderInfo>();
     }
 
     public bool HasWallInFront()
     {
-        return charMovement.IsTouchingWall;
+        return checkSurrounds.IsTouchingHorizontal;
     }
 
     public bool HasPlatformFront()

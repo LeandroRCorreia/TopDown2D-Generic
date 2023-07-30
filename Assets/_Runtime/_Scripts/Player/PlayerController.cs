@@ -7,7 +7,7 @@ interface ICharacter
 {
     CharacterMovement2D CharacterMovement {get;}
     CharacterFacing2D CharacterFacing {get;}
-
+    CheckSurrounds CheckSurrounds {get;}
     HealthSystem HealthControl{get;}
 
 }
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour, IPlayer
     private CharacterFacing2D _characterFacing;
 
     private CharacterMovement2D _characterMovement;
+    public CheckSurrounds CheckSurrounds {get; private set;}
 
     public CharacterMovement2D CharacterMovement 
     {
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour, IPlayer
 
     public HealthSystem HealthControl { get; private set; }
 
+
     private Vector3 playerInput;
 
     private void Awake() 
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour, IPlayer
         playerInputActions = new();
         CharacterMovement = GetComponent<CharacterMovement2D>();
         CharacterFacing = GetComponent<CharacterFacing2D>();
+        CheckSurrounds = GetComponent<CheckSurrounds>();
 
         HealthControl = GetComponent<HealthSystem>();
         WeaponAttack = GetComponentInChildren<IWeapon>(true);
